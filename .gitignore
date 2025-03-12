@@ -1,0 +1,10 @@
+sqldiff.exe
+sqlite3.def
+sqlite3.dll
+sqlite3.exe
+sqlite3_analyzer.exe
+sqlite3_rsync.exe
+__pycache__
+venv
+CREATE
+.quit
