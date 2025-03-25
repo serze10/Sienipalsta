@@ -2,30 +2,23 @@
 <html>
 
 <head>
-  <title>Kirjautuminen</title>
+  <title>Sieni-tunnistus</title>
 </head>
 
 <body>
-  {% if session.username %}
-  <p>
-    Olet kirjautunut nimellä {{ session.username }}
-  </p>
-  <p>
-    <a href="/logout">Kirjaudu ulos</a>
-  </p>
-  {% else %}
-  <form action="/login" method="post">
+  <h1>Sienten tunnistus</h1>
+    {% if session.username %}
     <p>
-      Tunnus: <br />
-      <input type="text" name="username" />
+      Olet kirjautunut nimellä {{ session.username }}
+    </p>
+    {% endif %}
+
     </p>
     <p>
-      Salasana: <br />
-      <input type="password" name="password" />
+      <a href="/login">Kirjaudu sisään</a>
+      <a href="/register">Luo tunnus</a>
+      <a href="/logout">Kirjaudu ulos</a>
     </p>
-    <input type="submit" value="Kirjaudu" />
-  </form>
-  {% endif %}
 </body>
 
 </html>
