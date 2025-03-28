@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Pyynnön poisto</title>
+</head>
+
+<body>
+  <h1>Pyynnön poisto</h1>
+  <p>Pyyntö: {{ item.title }}</p>
+  <p>Haluatko varmasti poistaa tämän Tunnistuspyynnön?</p>
+  <form action="/remove_item/{{ item.id }}" method="post">
+    <input type="submit" name="remove" value="Poista pyyntö">
+    <input type="submit" name="back" value="Palaa takaisin">
+  </form>
+</body>
+
+</html>
