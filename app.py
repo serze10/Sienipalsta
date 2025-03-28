@@ -10,6 +10,21 @@ import items
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
+@app.route("/")
+def index():
+    all_items = items.get_items()
+    return render_template("index.html", items=all_items)
+
+@app.route("/find_item")
+def find_item():
+    query = request.args.get("query")
+    if query:
+        results = items.find_items(query)
+    else:
+        query = ""
+        results = []
+    return render_template("find_item.html", query=query, results=results)
+
 @app.route("/new_item")
 def new():
     return render_template("new_item.html")
@@ -23,11 +38,6 @@ def create_item():
     
     items.add_item(title, location, description, user_id)
     return redirect("/")
-
-@app.route("/")
-def index():
-    all_items = items.get_items()
-    return render_template("index.html", items=all_items)
 
 @app.route("/item/<int:item_id>")
 def show_item(item_id):
