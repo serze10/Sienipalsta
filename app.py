@@ -79,8 +79,14 @@ def update_item():
         abort(403)
 
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     location = request.form["location"]
+    if not location or len(location) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 50:
+        abort(403)
 
     items.update_item(item_id, title, location, description)
     return redirect("/item/" + str(item_id))
