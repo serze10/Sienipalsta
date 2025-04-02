@@ -37,7 +37,7 @@ def find_item():
     return render_template("find_item.html", query=query, results=results)
 
 @app.route("/new_item")
-def new():
+def new_item():
     require_login()
     return render_template("new_item.html")
 
@@ -51,7 +51,7 @@ def create_item():
     if not location or len(location) > 50:
         abort(403)
     description = request.form["description"]
-    if not description or  len(description) > 1000:
+    if not description or len(description) > 1000:
         abort(403)
     user_id = session["user_id"]
     
@@ -64,13 +64,31 @@ def create_item():
 
     return redirect("/")
 
+@app.route("/create_comment", methods=["POST"])
+def create_comment():
+    require_login()
+
+    comment = request.form["comment"]
+    if not comment or len(comment) > 1000:
+        abort(403)
+    item_id = request.form["item_id"]
+    item = items.get_item(item_id)
+    if not item:
+        abort(403)
+    user_id = session["user_id"]
+
+    items.add_comment(item_id, user_id, comment)
+
+    return redirect("/item/" + str(item_id))
+
 @app.route("/item/<int:item_id>")
 def show_item(item_id):
     item = items.get_item(item_id)
     if not item:
         abort(404)
     classes = items.get_classes(item_id)
-    return render_template("show_item.html", item=item, classes=classes)
+    comments = items.get_comments(item_id)
+    return render_template("show_item.html", item=item, classes=classes, comments=comments)
 
 @app.route("/edit_item/<int:item_id>")
 def edit_item(item_id):
@@ -140,7 +158,7 @@ def create():
         users.create_user(username, password1)
     except sqlite3.IntegrityError:
         return "VIRHE: tunnus on jo varattu"
-    return "Tunnus luotu"
+    return render_template("user_created.html")
 
     password_hash = generate_password_hash(password1)
 

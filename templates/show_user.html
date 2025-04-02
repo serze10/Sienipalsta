@@ -8,9 +8,9 @@
 <body>
   <h1>Käyttäjä {{ user.username }}</h1>
   <p>
-    Käyttäjällä on {{ items | count }} tunnistuspyyntöä.
+    Käyttäjällä on {{ items | count }} julkaisua.
   </p>
-  <h2>Tunnistuspyynnöt</h2>
+  <h2>Julkaisut</h2>
   <ul>
     {% for item in items %}
     <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>

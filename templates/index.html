@@ -2,18 +2,23 @@
 <html>
 
 <head>
-  <title>Sieni-tunnistus</title>
+  <title>Sienipalsta</title>
 </head>
 
 <body>
-  <h1>Sienten tunnistus</h1>
+  <h1>Sienipalsta</h1>
     {% if session.username %}
     <p>
-      Olet kirjautunut nimellä {{ session.username }}, id-numerosi on {{ session.user_id }}
+      Hei {{ session.username }}, id-numerosi on {{ session.user_id }}.
+    </p>
+    <p>
+      Oma sivu: <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
+    </p>
+    <p>
+      <a href="/new_item">Uusi julkaisu</a>
     </p>
     <p>
       <a href="/logout">Kirjaudu ulos</a>
-      <a href="/new_item">Uusi tunnistuspyyntö</a>
     </p>
     {% else %}
     <p>
@@ -22,10 +27,10 @@
     </p>
     {% endif %}
     <p>
-      <a href="/find_item">Etsi tunnistuspyyntö</a>
+      <a href="/find_item">Etsi julkaisu</a>
     </p>
 
-    <h2>Tunnistuspyynnöt</h2>
+    <h2>Julkaisut</h2>
 
     <ul>
       {% for item in items %}
