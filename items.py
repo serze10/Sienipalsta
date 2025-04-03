@@ -17,11 +17,23 @@ def add_comment(item_id, user_id, comment):
     db.execute(sql, [item_id, user_id, comment])
 
 def get_comments(item_id):
-    sql = """SELECT comments.comment, users.id user_id, users.username
+    sql = """SELECT comments.comment, users.id user_id, users.username, comments.id
              FROM comments, users
              WHERE comments.item_id = ? AND comments.user_id = users.id
              ORDER BY comments.id DESC"""
     return db.query(sql, [item_id])
+
+def get_comment(comment_id):
+    sql = """SELECT comments.id,
+                    comments.item_id,
+                    comments.user_id,
+                    comments.comment,
+                    users.username
+             FROM comments, users
+             WHERE comments.user_id = users.id AND
+                   comments.id = ?"""
+    result = db.query(sql, [comment_id])
+    return result[0] if result else None
 
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
@@ -51,9 +63,18 @@ def update_item(item_id, title, location, description):
                           WHERE id = ?"""
     db.execute(sql, [title, location, description, item_id])
 
+def update_comment(comment_id, content):
+    sql = """UPDATE comments SET comment = ?
+                          WHERE id = ?"""
+    db.execute(sql, [content, comment_id])
+
 def remove_item(item_id):
     sql = "DELETE FROM items WHERE id = ?"
     db.execute(sql, [item_id])
+
+def remove_comment(comment_id):
+    sql = "DELETE FROM comments WHERE id = ?"
+    db.execute(sql, [comment_id])
 
 def find_items(query):
     sql = """SELECT id, title

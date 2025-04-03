@@ -2,11 +2,11 @@
 <html>
 
 <head>
-  <title>Pyynnön poisto</title>
+  <title>Julkaisun poisto</title>
 </head>
 
 <body>
-  <h1>Pyynnön poisto</h1>
+  <h1>Julkaisun poisto</h1>
   <p>Pyyntö: {{ item.title }}</p>
   <p>Haluatko varmasti poistaa tämän Tunnistuspyynnön?</p>
   <form action="/remove_item/{{ item.id }}" method="post">

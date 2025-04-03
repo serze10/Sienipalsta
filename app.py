@@ -67,7 +67,6 @@ def create_item():
 @app.route("/create_comment", methods=["POST"])
 def create_comment():
     require_login()
-
     comment = request.form["comment"]
     if not comment or len(comment) > 1000:
         abort(403)
@@ -138,9 +137,63 @@ def remove_item(item_id):
     if request.method == "POST":
         if "remove" in request.form:
             items.remove_item(item_id)
+
             return redirect("/")
         else:
             return redirect("/item/" + str(item_id))
+
+@app.route("/edit_comment/<int:comment_id>")
+def edit_comment(comment_id):
+    require_login()
+    comment = items.get_comment(comment_id)
+    if not comment:
+        abort(404)
+    if comment["user_id"] != session["user_id"]:
+        abort(403)
+    return render_template("edit_comment.html", comment=comment)
+
+@app.route("/update_comment", methods=["POST"])
+def update_comment():
+    require_login()
+    comment_id = request.form["comment_id"]
+    comment = items.get_comment(comment_id)
+    if not comment:
+        abort(404)
+    if comment["user_id"] != session["user_id"]:
+        abort(403)
+
+    content = request.form["content"]
+    if not content or len(content) > 1000:
+        abort(403)
+
+    items.update_comment(comment_id, content)
+    return redirect("/item/" + str(comment["item_id"]))
+
+@app.route("/remove_comment/<int:comment_id>", methods=["GET", "POST"])
+def remove_comment(comment_id):
+    require_login()
+    comment = items.get_comment(comment_id)
+    user_id = session["user_id"]
+
+    if comment["user_id"] != user_id:
+        abort(403)
+
+    if request.method == "GET":
+        return render_template("remove_comment.html", comment=comment, item_id=comment["item_id"])
+
+    if request.method == "POST":
+        item_id = request.form.get("item_id")
+        if not item_id:
+            abort(400, description="Item ID missing")
+
+        if "remove" in request.form:
+            items.remove_comment(comment_id)
+            return redirect("/item/" + str(item_id))
+        else:
+            return redirect("/item/" + str(item_id))
+
+
+
 
 @app.route("/register")
 def register():

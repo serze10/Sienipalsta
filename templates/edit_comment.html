@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Kommentin muokkaus</title>
+</head>
+
+<body>
+  <h1>Kommentin muokkaus</h1>
+  <form action="/update_comment" method="post">
+    <p>
+      Sisältö: <br />
+      <textarea name="content" rows="8" cols="60" maxlength="1000" required>{{ comment.comment }}</textarea>
+    </p>
+    <p>
+      <input type="hidden" name="comment_id" value="{{ comment.id }}">
+      <input type="submit" value="Muokkaa" />
+      <input type="submit" name="back" value="Palaa takaisin">
+    </p>
+  </form>
+</body>
+
+</html>

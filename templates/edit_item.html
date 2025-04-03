@@ -2,11 +2,11 @@
 <html>
 
 <head>
-  <title>Pyynnön muokkaus</title>
+  <title>Julkaisun muokkaus</title>
 </head>
 
 <body>
-  <h1>Pyynnön muokkaus</h1>
+  <h1>Julkaisun muokkaus</h1>
   <form action="/update_item" method="post">
     <p>
       Otsikko: <br />
@@ -23,7 +23,8 @@
     </p>
     <p>
       <input type="hidden" name="item_id" value="{{ item.id }}">
-      <input type="submit" value="Päivitä" />
+      <input type="submit" value="Muokkaa" />
+      <input type="submit" name="back" value="Palaa takaisin">
     </p>
   </form>
 </body>
