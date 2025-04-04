@@ -9,6 +9,7 @@ def get_connection():
 
 def execute(sql, params=[]):
     con = get_connection()
+    con.execute("PRAGMA foreign_keys = ON")
     result = con.execute(sql, params)
     con.commit()
     g.last_insert_id = result.lastrowid
@@ -19,6 +20,7 @@ def last_insert_id():
     
 def query(sql, params=[]):
     con = get_connection()
+    con.execute("PRAGMA foreign_keys = ON")
     result = con.execute(sql, params).fetchall()
     con.close()
     return result

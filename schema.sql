@@ -21,7 +21,14 @@ CREATE TABLE item_classes (
 
 CREATE TABLE comments (
     id INTEGER PRIMARY KEY,
+    item_id INTEGER,
+    user_id INTEGER,
+    comment TEXT,
+    FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE
+);
+
+CREATE TABLE images (
+    id INTEGER PRIMARY KEY,
     item_id INTEGER REFERENCES items,
-    user_id INTEGER REFERENCES users,
-    comment TEXT
+    image BLOB
 );

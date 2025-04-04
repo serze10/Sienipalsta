@@ -16,6 +16,11 @@ def add_comment(item_id, user_id, comment):
              VALUES (?, ?, ?)"""
     db.execute(sql, [item_id, user_id, comment])
 
+def add_image(item_id, image):
+    sql = "INSERT INTO images (item_id, image) VALUES (?, ?)"
+    db.execute(sql, [item_id, image])
+
+
 def get_comments(item_id):
     sql = """SELECT comments.comment, users.id user_id, users.username, comments.id
              FROM comments, users
@@ -38,6 +43,15 @@ def get_comment(comment_id):
 def get_classes(item_id):
     sql = "SELECT title, value FROM item_classes WHERE item_id = ?"
     return db.query(sql, [item_id])
+
+def get_images(item_id):
+    sql = "SELECT id FROM images WHERE item_id = ?"
+    return db.query(sql, [item_id])
+
+def get_image(image_id):
+    sql = "SELECT image FROM images WHERE id = ?"
+    result = db.query(sql, [image_id])
+    return result[0][0] if result else None
 
 def get_items():
     sql = "SELECT id, title FROM items ORDER BY id DESC"
@@ -69,6 +83,10 @@ def update_comment(comment_id, content):
     db.execute(sql, [content, comment_id])
 
 def remove_item(item_id):
+    sql = "DELETE FROM comments WHERE item_id = ?"
+    db.execute(sql, [item_id])
+    sql = "DELETE FROM item_classes WHERE item_id = ?"
+    db.execute(sql, [item_id])
     sql = "DELETE FROM items WHERE id = ?"
     db.execute(sql, [item_id])
 
