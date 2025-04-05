@@ -1,37 +1,14 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Sienipalsta</title>
-</head>
+{% block title %}Sienipalsta{% endblock %}
 
-<body>
-  <h1>Sienipalsta</h1>
-  {% if session.user_id %}
-  <p>
-    Hei {{ session.username }}!
-  </p>
-  {% endif %}
+{% block content %}
+<h2>Julkaisut</h2>
 
-  <p>
-    <a href="/find_item">Etsi julkaisu</a> |
-  {% if session.user_id %}
-    <a href="/user/{{ session.user_id }}">Oma sivu</a> |
-    <a href="/new_item">Uusi julkaisu</a> |
-    <a href="/logout">Kirjaudu ulos</a> |
-  {% else %}
-    <a href="/login">Kirjaudu sisään</a> |
-    <a href="/register">Luo tunnus</a>
-  {% endif %}
-  </p>
+<ul>
+  {% for item in items %}
+  <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}
 
-    <h2>Julkaisut</h2>
-
-    <ul>
-      {% for item in items %}
-      <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
-      {% endfor %}
-    </ul>
-</body>
-
-</html>

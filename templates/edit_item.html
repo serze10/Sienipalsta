@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Julkaisun muokkaus</title>
-</head>
+{% block title %}Julkaisun muokkaus{% endblock %}
 
+{% block content %}
 <body>
-  <h1>Julkaisun muokkaus</h1>
+  <h2>Julkaisun muokkaus</h2>
   <form action="/update_item" method="post">
     <p>
       Otsikko: <br />
@@ -28,5 +26,4 @@
     </p>
   </form>
 </body>
-
-</html>
+{% endblock %}

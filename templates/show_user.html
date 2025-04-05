@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Käyttäjä {{ user.username }}</title>
-</head>
+{% block title %}Käyttäjä {{ user.username }}{% endblock %}
 
+{% block content %}
 <body>
   <h1>Käyttäjä {{ user.username }}</h1>
   <p>
@@ -16,9 +14,6 @@
     <li><a href="/item/{{ item.id }}">{{ item.title }}</a></li>
     {% endfor %}
   </ul>
-  <p>
-    <a href="/">Etusivulle</a>
-  </p>
 </body>
-
+{% endblock %}
 </html>

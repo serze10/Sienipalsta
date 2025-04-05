@@ -1,40 +1,35 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Uusi julkaisu</title>
-</head>
+{% block title %}Uusi julkaisu{% endblock %}
 
-<body>
-  <h1>Uusi julkaisu</h1>
-  <form action="/create_item" method="post">
-    <p>
-      Otsikko: <br />
-      <input type="text" name="title" maxlength="50" required />
-    </p>
-    <p>
-      Sijainti: <br />
-      <input type="text" name="location" maxlength="50" required />
-    </p>
-    <p>
-      Kuvaus: <br />
-      <textarea name="description" rows="8" cols="60" maxlength="1000" required></textarea>
-    </p>
-    <p>
-      Aihe: <br />
-      <select name="section">
-        <option value="">(valitse)</option>
-        <option value="tunnistus">tunnistus</option>
-        <option value="reseptit">reseptit</option>
-        <option value="kasvatus">kasvatus</option>
-        <option value="terveys">terveys</option>
-        <option value="vapaa">vapaa</option>
-      </select>
-    </p>
-    <p>
-      <input type="submit" value="Lähetä" />
-    </p>
-  </form>
-</body>
-
-</html>
+{% block content %}
+<h1>Uusi julkaisu</h1>
+<form action="/create_item" method="post">
+  <p>
+    Otsikko: <br />
+    <input type="text" name="title" maxlength="50" required />
+  </p>
+  <p>
+    Sijainti: <br />
+    <input type="text" name="location" maxlength="50" required />
+  </p>
+  <p>
+    Kuvaus: <br />
+    <textarea name="description" rows="8" cols="60" maxlength="1000" required></textarea>
+  </p>
+  <p>
+    Aihe: <br />
+    <select name="section">
+      <option value="">(valitse)</option>
+      <option value="tunnistus">tunnistus</option>
+      <option value="reseptit">reseptit</option>
+      <option value="kasvatus">kasvatus</option>
+      <option value="terveys">terveys</option>
+      <option value="vapaa">vapaa</option>
+    </select>
+  </p>
+  <p>
+    <input type="submit" value="Lähetä" />
+  </p>
+</form>
+{% endblock %}

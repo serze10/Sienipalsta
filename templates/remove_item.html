@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Julkaisun poisto</title>
-</head>
+{% block title %}Julkaisun poisto{% endblock %}
 
+{% block content %}
 <body>
-  <h1>Julkaisun poisto</h1>
+  <h2>Julkaisun poisto</h2>
   <p>Pyyntö: {{ item.title }}</p>
   <p>Haluatko varmasti poistaa tämän Tunnistuspyynnön?</p>
   <form action="/remove_item/{{ item.id }}" method="post">
@@ -14,5 +12,4 @@
     <input type="submit" name="back" value="Palaa takaisin">
   </form>
 </body>
-
-</html>
+{% endblock %}
