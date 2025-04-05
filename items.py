@@ -87,12 +87,18 @@ def remove_item(item_id):
     db.execute(sql, [item_id])
     sql = "DELETE FROM item_classes WHERE item_id = ?"
     db.execute(sql, [item_id])
+    sql = "DELETE FROM images WHERE item_id = ?"
+    db.execute(sql, [item_id])
     sql = "DELETE FROM items WHERE id = ?"
     db.execute(sql, [item_id])
 
 def remove_comment(comment_id):
     sql = "DELETE FROM comments WHERE id = ?"
     db.execute(sql, [comment_id])
+
+def remove_image(item_id, image_id):
+    sql = "DELETE FROM images WHERE id = ? AND item_id = ?"
+    db.execute(sql, [image_id, item_id])
 
 def find_items(query):
     sql = """SELECT id, title
