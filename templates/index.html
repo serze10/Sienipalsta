@@ -7,28 +7,23 @@
 
 <body>
   <h1>Sienipalsta</h1>
-    {% if session.username %}
-    <p>
-      Hei {{ session.username }}, id-numerosi on {{ session.user_id }}.
-    </p>
-    <p>
-      Oma sivu: <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
-    </p>
-    <p>
-      <a href="/new_item">Uusi julkaisu</a>
-    </p>
-    <p>
-      <a href="/logout">Kirjaudu ulos</a>
-    </p>
-    {% else %}
-    <p>
-      <a href="/login">Kirjaudu sisään</a>
-      <a href="/register">Luo tunnus</a>
-    </p>
-    {% endif %}
-    <p>
-      <a href="/find_item">Etsi julkaisu</a>
-    </p>
+  {% if session.user_id %}
+  <p>
+    Hei {{ session.username }}!
+  </p>
+  {% endif %}
+
+  <p>
+    <a href="/find_item">Etsi julkaisu</a> |
+  {% if session.user_id %}
+    <a href="/user/{{ session.user_id }}">Oma sivu</a> |
+    <a href="/new_item">Uusi julkaisu</a> |
+    <a href="/logout">Kirjaudu ulos</a> |
+  {% else %}
+    <a href="/login">Kirjaudu sisään</a> |
+    <a href="/register">Luo tunnus</a>
+  {% endif %}
+  </p>
 
     <h2>Julkaisut</h2>
 

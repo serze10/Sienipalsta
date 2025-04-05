@@ -9,3 +9,4 @@ venv
 CREATE
 .quit
 testikuva*.png
+database.db
