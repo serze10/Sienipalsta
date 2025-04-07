@@ -10,3 +10,18 @@ body {
     margin: 1em;
     padding: 0.2em 0.5em;
 }
+
+
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+
+  .info {
+    border: 2px solid black;
+    margin: 1em;
+    padding: 0.5em;
+    background-color: blue;
+    color: white;
+  }
