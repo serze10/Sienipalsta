@@ -11,6 +11,7 @@
       <textarea name="content" rows="8" cols="60" maxlength="1000" required>{{ comment.comment }}</textarea>
     </p>
     <p>
+      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
       <input type="hidden" name="comment_id" value="{{ comment.id }}">
       <input type="submit" value="Muokkaa" />
     </p>

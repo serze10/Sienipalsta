@@ -8,6 +8,7 @@
   <p>Kommentti: {{ comment.comment }} </p>
   <p>Haluatko varmasti poistaa tämän kommentin?</p>
   <form action="/remove_comment/{{ comment.id }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="hidden" name="item_id" value="{{ item_id }}">
     <input type="submit" name="remove" value="Poista">
   </form>

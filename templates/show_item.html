@@ -45,6 +45,7 @@
 <h3>Uusi kommentti</h3>
 <form action="/create_comment" method="post">
   <textarea name="comment" rows="8" cols="60" maxlength="1000" required></textarea>
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="hidden" name="item_id" value="{{ item.id }}">
   <input type="submit" value="Lähetä" />
 {% endif %}

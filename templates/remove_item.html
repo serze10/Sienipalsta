@@ -10,6 +10,7 @@
   </p>
   <p>Haluatko varmasti poistaa tämän julkaisun?</p>
   <form action="/remove_item/{{ item.id }}" method="post">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
     <input type="submit" name="remove" value="Poista">
   </form>
   <p>
