@@ -110,9 +110,13 @@ def remove_image(item_id, image_id):
     db.execute(sql, [image_id, item_id])
 
 def find_items(query):
-    sql = """SELECT id, title
+    sql = """SELECT items.id, items.title, users.id user_id, users.username,
+                    COUNT(comments.id) as comment_count
              FROM items
-             WHERE title LIKE ? OR description LIKE ?
-             ORDER BY id DESC"""
+             JOIN users ON items.user_id = users.id
+             LEFT JOIN comments ON items.id = comments.item_id
+             WHERE items.title LIKE ? OR items.description LIKE ?
+             GROUP BY items.id, users.id
+             ORDER BY items.id DESC"""
     like = "%" + query + "%"
     return db.query(sql, [like, like])

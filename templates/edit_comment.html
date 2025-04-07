@@ -7,11 +7,10 @@
   <h2>Kommentin muokkaus</h2>
   <form action="/update_comment" method="post">
     <p>
-      Kommentti: <br />
-      <textarea name="content" rows="8" cols="60" maxlength="1000" required>{{ comment.comment }}</textarea>
+      <label for="content">Kommentti:</label> <br />
+      <textarea name="content" id="content" rows="8" cols="60" maxlength="1000" required>{{ comment.comment }}</textarea>
     </p>
     <p>
-      <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
       <input type="hidden" name="comment_id" value="{{ comment.id }}">
       <input type="submit" value="Muokkaa" />
     </p>

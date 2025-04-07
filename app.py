@@ -236,7 +236,6 @@ def remove_item(item_id):
 @app.route("/edit_comment/<int:comment_id>")
 def edit_comment(comment_id):
     require_login()
-    check_csrf()
     comment = items.get_comment(comment_id)
     if not comment:
         abort(404)

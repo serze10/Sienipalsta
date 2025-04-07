@@ -11,7 +11,7 @@
   <img src="/image/{{ image.id }}" alt="Julkaisun kuva" />
   {% endfor %}
 <p>
-  {{ item.description | show_line }}
+  {{ item.description | show_lines }}
 </p>
 <ul>
   <li>Julkaisija: <a href="/user/{{ item.user_id }}">{{ item.username }}</a></li>
@@ -42,9 +42,9 @@
 {% endfor %}
 </ul>
 {% if session.user_id %}
-<h3>Uusi kommentti</h3>
+<h3><label for="new_comment">Uusi kommentti</label></h3>
 <form action="/create_comment" method="post">
-  <textarea name="comment" rows="8" cols="60" maxlength="1000" required></textarea>
+  <textarea name="comment" id="new_comment" rows="8" cols="60" maxlength="1000" required></textarea>
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="hidden" name="item_id" value="{{ item.id }}">
   <input type="submit" value="Lähetä" />
