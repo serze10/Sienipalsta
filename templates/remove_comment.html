@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Kommentin poisto</title>
-</head>
+{% block title %}Kommentin poisto{% endblock %}
 
+{% block content %}
 <body>
-  <h1>Kommentin poisto</h1>
+  <h2>Kommentin poisto</h2>
   <p>Kommentti: {{ comment.comment }} </p>
   <p>Haluatko varmasti poistaa tämän kommentin?</p>
   <form action="/remove_comment/{{ comment.id }}" method="post">

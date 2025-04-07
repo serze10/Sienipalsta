@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Kommentin muokkaus</title>
-</head>
+{% block title %}Kommentin muokkaus{% endblock %}
 
+{% block content %}
 <body>
-  <h1>Kommentin muokkaus</h1>
+  <h2>Kommentin muokkaus</h2>
   <form action="/update_comment" method="post">
     <p>
       Sisältö: <br />
