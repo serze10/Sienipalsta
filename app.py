@@ -6,6 +6,7 @@ import db
 import config
 import items
 import users
+import markupsafe
 
 app = Flask(__name__)
 app.secret_key = config.secret_key
@@ -23,6 +24,12 @@ def index():
     all_items = items.get_items()
 
     return render_template("index.html", items=all_items)
+
+@app.template_filter()
+def show_lines(content):
+    content = str(markupsafe.escape(content))
+    content = content.replace("\n", "<br />")
+    return markupsafe.Markup(content)
 
 @app.route("/user/<int:user_id>")
 def show_user(user_id):
