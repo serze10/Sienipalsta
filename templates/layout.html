@@ -11,7 +11,7 @@
   <h1>Sienipalsta</h1>
   {% if session.user_id %}
   <p>
-    Hei {{ session.username }}!
+    Hei <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
   </p>
   {% endif %}
 
@@ -19,7 +19,6 @@
     <a href="/">Etusivu</a> |
     <a href="/find_item">Etsi julkaisu</a> |
   {% if session.user_id %}
-    <a href="/user/{{ session.user_id }}">Oma sivu</a> |
     <a href="/new_item">Uusi julkaisu</a> |
     <a href="/logout">Kirjaudu ulos</a> |
   {% else %}
