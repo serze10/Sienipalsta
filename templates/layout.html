@@ -7,14 +7,17 @@
 </head>
 
 <body>
-  <img src="/static/logo.png" alt="Logo" class="logo">
-  <h1>Sienipalsta</h1>
+  <div class="header">
+    <h1>Sienipalsta</h1>
+    <img src="/static/logo.png" alt="Logo" class="logo">
+  </div>
+
   {% if session.user_id %}
-  <p>
+  <p class="greeting">
     Hei <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
   </p>
   {% endif %}
-
+  <div class="nav">
   <p>
     <a href="/">Etusivu</a> |
     <a href="/find_item">Etsi julkaisu</a> |
@@ -26,6 +29,7 @@
     <a href="/register">Luo tunnus</a>
   {% endif %}
   </p>
+  </div>
   {% for message in get_flashed_messages() %}
   <p class="info">
     {{ message }}
