@@ -5,11 +5,15 @@
 {% block content %}
 <body>
   <h2>Julkaisun poisto</h2>
-  <p>Pyyntö: {{ item.title }}</p>
-  <p>Haluatko varmasti poistaa tämän Tunnistuspyynnön?</p>
+  <p>
+    Julkaisu: {{ item.title }}
+  </p>
+  <p>Haluatko varmasti poistaa tämän julkaisun?</p>
   <form action="/remove_item/{{ item.id }}" method="post">
     <input type="submit" name="remove" value="Poista pyyntö">
-    <input type="submit" name="back" value="Palaa takaisin">
   </form>
+  <p>
+    <a href="/item/{{ item.id }}">Takaisin julkaisuun</a>
+  </p>
 </body>
 {% endblock %}

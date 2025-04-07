@@ -5,7 +5,9 @@
 {% block content %}
 <body>
   <h2>Julkaisun kuvat</h2>
-
+  <p>
+    Julkaisu: <a href="/item/{{ item.id}}">{{ item.title }}</a>
+  </p>
   <p>
     Ilmoituksessa on {{ images | count }} kuvaa.
   </p>
@@ -29,6 +31,8 @@
     <input type="hidden" name="item_id" value="{{ item.id }}">
     <input type="submit" value="Lähetä" />
   </form>
-
+  <p>
+    <a href="/item/{{ item.id }}">Takaisin julkaisuun</a>
+  </p>
 </body>
 {% endblock %}

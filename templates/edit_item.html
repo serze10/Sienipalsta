@@ -5,6 +5,7 @@
 {% block content %}
 <body>
   <h2>Julkaisun muokkaus</h2>
+
   <form action="/update_item" method="post">
     <p>
       Otsikko: <br />
@@ -22,8 +23,10 @@
     <p>
       <input type="hidden" name="item_id" value="{{ item.id }}">
       <input type="submit" value="Muokkaa" />
-      <input type="submit" name="back" value="Palaa takaisin">
     </p>
   </form>
+<p>
+  <a href="/item/{{ item.id }}">Takaisin julkaisuun</a>
+</p>
 </body>
 {% endblock %}
