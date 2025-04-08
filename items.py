@@ -1,16 +1,15 @@
 import db
 
 def add_item(title, location, description, user_id, classes):
-    sql = """INSERT INTO items (title, location, description, user_id) 
+    sql = """INSERT INTO items (title, location, description, user_id)
              VALUES (?, ?, ?, ?)"""
     db.execute(sql, [title, location, description, user_id])
 
     item_id = db.last_insert_id()
-
     sql = "INSERT INTO item_classes (item_id, title, value) VALUES (?, ?, ?)"
-    for title, value in classes:
-        db.execute(sql, [item_id, title, value])
-        
+    for claa_title, class_value in classes:
+        db.execute(sql, [item_id, class_title, class_value])
+
     return item_id
 
 def add_comment(item_id, user_id, comment):
