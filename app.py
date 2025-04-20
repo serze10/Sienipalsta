@@ -308,7 +308,7 @@ def create():
     except sqlite3.IntegrityError:
         flash("VIRHE: Tunnus on jo varattu")
         return redirect("/register")
-    return render_template("user_created.html")
+    return redirect("/login")
 
 @app.route("/login", methods=["POST", "GET"])
 def login():
