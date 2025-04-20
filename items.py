@@ -7,7 +7,7 @@ def add_item(title, location, description, user_id, classes):
 
     item_id = db.last_insert_id()
     sql = "INSERT INTO item_classes (item_id, title, value) VALUES (?, ?, ?)"
-    for claa_title, class_value in classes:
+    for class_title, class_value in classes:
         db.execute(sql, [item_id, class_title, class_value])
 
     return item_id
