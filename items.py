@@ -79,11 +79,14 @@ def get_item(item_id):
     return result[0] if result else None
 
 def update_item(item_id, title, location, description):
-    sql = """UPDATE items SET title = ?,
-                              location = ?,
-                              description = ?
-                          WHERE id = ?"""
-    db.execute(sql, [title, location, description, item_id])
+    try:
+        sql = """UPDATE items SET title = ?,
+                                  location = ?,
+                                  description = ?
+                              WHERE id = ?"""
+        db.execute(sql, [title, location, description, item_id])
+    except Exception as e:
+        print(f"Error updating item: {e}")
 
 def update_comment(comment_id, content):
     sql = """UPDATE comments SET comment = ?

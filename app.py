@@ -16,11 +16,20 @@ app.secret_key = config.secret_key
 
 def require_login():
     if "user_id" not in session:
+        print("User not logged in")
         abort(403)
+    else:
+        print(f"User ID: {session['user_id']}")
+
+
 
 def check_csrf():
+    print(f"Session CSRF token: {session['csrf_token']}")
+    print(f"Form CSRF token: {request.form['csrf_token']}")
     if request.form["csrf_token"] != session["csrf_token"]:
+        print("CSRF token mismatch")
         abort(403)
+
 
 @app.route("/")
 def index():
@@ -91,7 +100,7 @@ def create_item():
         classes.append(("Aihe", section))
 
     item_id = items.add_item(title, location, description, user_id, classes)
-    items.add_item(title, location, description, user_id, classes)
+
     return redirect("/item/" + str(item_id))
 
 @app.route("/create_comment", methods=["POST"])
@@ -192,26 +201,31 @@ def remove_images():
 def update_item():
     require_login()
     check_csrf()
-    item_id = request.form["item_id"]
-    item = items.get_item(item_id)
-    title = request.form["title"]
-    location = request.form["location"]
+    try:
+        item_id = request.form["item_id"]
+        item = items.get_item(item_id)
+        title = request.form["title"]
+        location = request.form["location"]
 
-    if not item:
-        abort(404)
-    if item["user_id"] != session["user_id"]:
-        abort(403)
-    if not title or len(title) > 50:
-        abort(403)
-    if not location or len(location) > 50:
-        abort(403)
-    description = request.form["description"]
-    if not description or len(description) > 50:
-        abort(403)
+        if not item:
+            abort(404)
+        if item["user_id"] != session["user_id"]:
+            abort(403)
+        if not title or len(title) > 50:
+            abort(403)
+        if not location or len(location) > 50:
+            abort(403)
+        description = request.form["description"]
+        if not description or len(description) > 50:
+            abort(403)
 
-    items.update_item(item_id, title, location, description)
+        items.update_item(item_id, title, location, description)
+    except Exception as e:
+        print(f"Error in update_item route: {e}")
+        abort(500)
 
     return redirect("/item/" + str(item_id))
+
 
 @app.route("/remove_item/<int:item_id>", methods=["GET", "POST"])
 def remove_item(item_id):
